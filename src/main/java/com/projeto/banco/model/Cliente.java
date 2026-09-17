@@ -9,7 +9,7 @@ import lombok.Setter;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity (name = "clientes")
+@Entity (name = "tb_clientes")
 @Getter
 @Setter
 @NoArgsConstructor 
@@ -17,12 +17,16 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @Column(nullable = false)
     private String nome;
+    
     @Column(nullable = false, unique = true)
     private String email;
+    
     @Column (nullable = false)
     private String senha;
+    
     @Column(nullable = false, unique = true)
     private String cpf;
 
