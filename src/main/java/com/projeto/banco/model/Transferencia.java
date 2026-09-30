@@ -3,31 +3,38 @@ package com.projeto.banco.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Entity(name = "tb_transferencias")
+@Entity 
+@Table(name = "tb_transferencias")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor 
+@AllArgsConstructor
 public class Transferencia {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany(mappedBy = "tb_clientes")
-     private Long idCliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente idCliente;
     
-     @Column (nullable = false)
-     private String valorTransferecencia;
+    @Column(nullable = false)
+    private Double valorDaTrasferencia;
     
-     @Column (nullable = false)
-     private String contaOrigem;
+    @Column(nullable = false)
+    private String contaOrigem;
     
-     @OneToMany(mappedBy = "tb_ccontas")
-     private Long idConta;
+    @Column(nullable = false)
+    private String contaDestino;
 }

@@ -1,70 +1,79 @@
 package com.projeto.banco.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.GenerationType;
 
-@Entity (name = "tb_cartoes")
+@Entity 
+@Table(name = "tb_cartoes")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor 
+@AllArgsConstructor
 public class Cartao {
+    
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    // Relacionamento com o Cliente
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Cliente idCliente;
     
     @Column(nullable = false)
     private String titular;
-
-    @Column(nullable = false, unique = true)
+    
+    @Column(nullable = false)
     private String cpf;
-
+    
     @Column(nullable = false)
     private String tipoCartao;
-
+    
     @Column(nullable = false)
     private String bandeira;
-
+    
     @Column(nullable = false)
-    private BigDecimal rendaInformada;
-
+    private Double rendaInformada;
+    
     @Column(nullable = false)
     private String enderecoDeEntrega;
-
+    
     @Column(nullable = false)
-    private BigDecimal limite;
-
+    private Double limite;
+    
     @Column(nullable = false, unique = true)
     private String numeroCartao;
-
+    
     @Column(nullable = false)
-    private LocalDate dataDeValidade;
-
+    private String dataDeValidade;
+    
     @Column(nullable = false)
     private String cvv;
-
+    
     @Column(nullable = false)
     private String agencia;
-
+    
     @Column(nullable = false)
     private String conta;
-
-    @Column(nullable = false)
+    
+    @Column(nullable = false, unique = true)
     private String cod;
-
+    
     @Column(nullable = false)
-    private LocalDate dataSolicitacao;
-
+    private String dataSolicitacao;
+    
     @Column(nullable = false)
     private String statusPedido;
-
-    @Column (nullable = true)
+    
     private String codigoRastreio;
 }

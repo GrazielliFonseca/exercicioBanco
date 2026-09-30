@@ -30,4 +30,7 @@ public class Cliente {
     @Column(nullable = false, unique = true)
     private String cpf;
 
+    @Column(nullable = false)
+    private Double saldo = 0.0;
+
 }

@@ -19,13 +19,15 @@ public class Cofre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
     
-     @OneToMany(mappedBy = "tb_clientes")
-     private Long idCliente;
+    @Column(nullable = false)
+    private Long idCliente;
+
+    @Column(nullable = false)
+    private Double saldo = 0.0;
     
-     @Column(nullable = false)
-     private String saldo;
-    
-     @Column (nullable = false)
-     private double valor;
+    @Column(nullable = false)
+    private Double valor = 0.0;
+
+    private Integer tempoPermanenciaMeses; // Auxiliar para a função de tempo de permanência
 
 }
