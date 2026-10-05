@@ -22,7 +22,7 @@ public class ContaService {
     }
 
     public Conta criarConta(Long idClienteParam, Conta conta) {
-        if (contaRepository.findByidClient_Id(idClienteParam).isPresent()) {
+        if (contaRepository.findByidClientId(idClienteParam).isPresent()) {
             throw erro("Já existe uma conta cadastrada para este cliente.");
         }
         

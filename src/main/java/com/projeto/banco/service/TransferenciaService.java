@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.projeto.banco.model.Cliente;
 import com.projeto.banco.model.Transferencia;
+import com.projeto.banco.repository.ClienteRepository;
 import com.projeto.banco.repository.TransferenciaRepository;
 
 @Service
@@ -15,10 +16,14 @@ public class TransferenciaService {
 
     private final TransferenciaRepository transferenciaRepository;
     private final ClienteService clienteService;
+    private final ClienteRepository clienteRepository;
 
-    public TransferenciaService(TransferenciaRepository transferenciaRepository, ClienteService clienteService) {
+   public TransferenciaService(TransferenciaRepository transferenciaRepository, 
+                                ClienteService clienteService, 
+                                ClienteRepository clienteRepository) {
         this.transferenciaRepository = transferenciaRepository;
         this.clienteService = clienteService;
+        this.clienteRepository = clienteRepository;
     }
 
     public Transferencia fazerTransferencia(Long idClienteParam, Double valorDaTrasferencia, String contaOrigem, String contaDestino) {
@@ -36,7 +41,18 @@ public class TransferenciaService {
 
         Cliente cliente = clienteService.buscarPorId(idClienteParam);
 
-        Transferencia transferencia = new Transferencia();
+        if (cliente.getSaldo() == null) {
+            cliente.setSaldo(0.0);
+        }
+
+        if (cliente.getSaldo() < valorDaTrasferencia) {
+            throw erro("Saldo insuficiente para realizar a transferência.");
+        }
+
+        cliente.setSaldo(cliente.getSaldo() - valorDaTrasferencia);
+        clienteRepository.save(cliente);
+
+      Transferencia transferencia = new Transferencia();
         transferencia.setIdCliente(cliente);
         transferencia.setValorDaTrasferencia(valorDaTrasferencia);
         transferencia.setContaOrigem(contaOrigem);
