@@ -54,7 +54,6 @@ public class NotificacaoService {
                         "Notificação com ID " + id + " não encontrada."));
     }
 
-    // ----- Regra de Erro -----
     private ResponseStatusException erro(String mensagem) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, mensagem);
     }

@@ -48,7 +48,7 @@ class ContaServiceTest {
         Conta contaCriada = contaService.criarConta(1L, conta);
 
         assertNotNull(contaCriada);
-        assertEquals(0.0, contaCriada.getSaldo()); // Garante que inicializou com zero se nulo
+        assertEquals(0.0, contaCriada.getSaldo());
         assertEquals(cliente, contaCriada.getIdCliente());
         verify(contaRepository, times(1)).save(conta);
     }

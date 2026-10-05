@@ -81,7 +81,6 @@ public class ContaService {
         return contaRepository.save(conta);
     }
     
-    // ----- Regra de Erro -----
     private ResponseStatusException erro(String mensagem) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, mensagem);
     }

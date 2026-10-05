@@ -40,7 +40,6 @@ public class CofreService {
         return cofre.getSaldo();
     }
 
-    // + add_valor()
     public Cofre addValor(Long id, Double valorAdicionar) {
         if (valorAdicionar == null || valorAdicionar <= 0) {
             throw erro("O valor a ser adicionado deve ser maior que zero.");
@@ -80,8 +79,6 @@ public class CofreService {
 
         return cofreRepository.save(cofre);
     }
-
-    // ----- Regras de Validação / Erros -----
 
     private ResponseStatusException erro(String mensagem) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, mensagem);
