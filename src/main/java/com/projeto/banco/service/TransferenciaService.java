@@ -21,7 +21,7 @@ public class TransferenciaService {
         this.clienteService = clienteService;
     }
 
-    public Transferencia fazer_transferencia(Long idClienteParam, Double valorDaTrasferencia, String contaOrigem, String contaDestino) {
+    public Transferencia fazerTransferencia(Long idClienteParam, Double valorDaTrasferencia, String contaOrigem, String contaDestino) {
         if (valorDaTrasferencia == null || valorDaTrasferencia <= 0) {
             throw erro("O valor da transferência deve ser maior que zero.");
         }
@@ -34,7 +34,6 @@ public class TransferenciaService {
             throw erro("A conta de origem não pode ser igual à conta de destino.");
         }
 
-
         Cliente cliente = clienteService.buscarPorId(idClienteParam);
 
         Transferencia transferencia = new Transferencia();
@@ -46,7 +45,7 @@ public class TransferenciaService {
         return transferenciaRepository.save(transferencia);
     }
 
-    public Transferencia ver_transferencia(Long id) {
+    public Transferencia verTransferencia(Long id) {
         return transferenciaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Transferência com ID " + id + " não encontrada."));
@@ -60,7 +59,6 @@ public class TransferenciaService {
         return transferenciaRepository.findByidClient_Id(idCliente);
     }
 
-    // ----- Regra de Erro -----
     private ResponseStatusException erro(String mensagem) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, mensagem);
     }
