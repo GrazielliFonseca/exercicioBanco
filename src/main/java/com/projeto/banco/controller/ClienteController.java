@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 import com.projeto.banco.model.Cliente;
+import com.projeto.banco.model.PessoaFisica;
+import com.projeto.banco.model.PessoaJuridica;
 import com.projeto.banco.service.ClienteService;
 
 @RestController
@@ -17,9 +19,14 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
-    @PostMapping
-    public Cliente criarConta(@RequestBody Cliente cliente) {
-        return clienteService.criarConta(cliente);
+    @PostMapping("/pf")
+    public Cliente criarPessoaFisica(@RequestBody PessoaFisica pessoaFisica) {
+        return clienteService.criarConta(pessoaFisica);
+    }
+
+    @PostMapping("/pj")
+    public Cliente criarPessoaJuridica(@RequestBody PessoaJuridica pessoaJuridica) {
+        return clienteService.criarConta(pessoaJuridica);
     }
 
     @GetMapping

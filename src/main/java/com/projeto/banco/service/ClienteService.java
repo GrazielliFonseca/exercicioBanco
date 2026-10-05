@@ -19,7 +19,7 @@ public class ClienteService {
     }
 
     public Cliente criarConta(Cliente cliente) {
-        validarCpfUnico(cliente.getCpf());
+        validarDocumentoUnico(cliente.getDocumento());
         
         if (cliente.getSaldo() == null) {
             cliente.setSaldo(0.0);
@@ -70,11 +70,9 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    // ----- Regras de Validação -----
-
-    private void validarCpfUnico(String cpf) {
-        if (clienteRepository.existsByCpf(cpf)) {
-            throw erro("Já existe um cliente cadastrado com o CPF " + cpf + ".");
+    private void validarDocumentoUnico(String documento) {
+        if (clienteRepository.existsByDocumento(documento)) {
+            throw erro("Já existe um cadastro com este documento: " + documento + ".");
         }
     }
 
