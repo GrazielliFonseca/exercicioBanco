@@ -30,7 +30,7 @@ public class CartaoService {
 
         Cliente cliente = clienteService.buscarPorId(idClienteParam);
 
-        cartao.setIdCliente(cliente);
+        cartao.setIdCliente( cliente.getId()  );
         cartao.setDataSolicitacao(LocalDate.now().toString());
         cartao.setStatusPedido("EM_ANALISE");
         

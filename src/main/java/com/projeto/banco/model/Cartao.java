@@ -7,14 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity 
-@Table(name = "tb_cartoes")
+@Entity(name = "tb_cartoes")
 @Getter
 @Setter
 @NoArgsConstructor 
@@ -28,7 +26,7 @@ public class Cartao {
     // Relacionamento com o Cliente
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)
-    private Cliente idCliente;
+    private Long idCliente;
     
     @Column(nullable = false)
     private String titular;
@@ -75,5 +73,7 @@ public class Cartao {
     @Column(nullable = false)
     private String statusPedido;
     
+
+    @Column(nullable = false)
     private String codigoRastreio;
 }

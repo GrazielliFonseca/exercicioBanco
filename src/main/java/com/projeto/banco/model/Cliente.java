@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "tb_clientes")
+@Entity(name = "tb_clientes")
+@Table
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_cliente", discriminatorType = DiscriminatorType.STRING)
 @Getter
